@@ -34,17 +34,22 @@ Follow these steps
       ```
   1. we're up and running. Let's make a HTTP call that *will NOT* be cached (due to the `Cache-Control` response header)
       ```bash
-      curl --cacert ./workdir/certs/blah.local.crt https://blah.local/nocache # first call always takes time
-      curl --cacert ./workdir/certs/blah.local.crt https://blah.local/nocache # second call isn't any faster as it wasn't cached
+      # first call always takes time
+      curl --cacert ./workdir/certs/blah.local.crt https://blah.local/nocache
+      # second call isn't any faster as it wasn't cached
+      curl --cacert ./workdir/certs/blah.local.crt https://blah.local/nocache
       ```
   1. now we'll make a cached call
       ```bash
-      curl --cacert ./workdir/certs/blah.local.crt https://blah.local/cache # first call always takes time
-      curl --cacert ./workdir/certs/blah.local.crt https://blah.local/cache # second call is instant as it was cached
+      # first call always takes time
+      curl --cacert ./workdir/certs/blah.local.crt https://blah.local/cache
+      # second call is instant as it was cached
+      curl --cacert ./workdir/certs/blah.local.crt https://blah.local/cache
       ```
   1. as a bonus, we can show automatic redirection from HTTP to HTTPS
       ```bash
-      curl -v -L --cacert ./workdir/certs/blah.local.crt http://blah.local/cache # note than we get a 301 to the HTTP URL
+      # note than we get a 301 to the HTTPS URL
+      curl -v -L --cacert ./workdir/certs/blah.local.crt http://blah.local/cache
       ```
   1. finally, shut down the stack
       ```bash
