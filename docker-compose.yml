@@ -1,0 +1,28 @@
+version: '3.4'
+services:
+  app:
+    image: bitnami/express
+    volumes:
+      - ./app:/app
+    entrypoint: node /app/index.js
+    environment:
+      VIRTUAL_HOST: blah.local,www.blah.local
+
+  nginx:
+    image: jwilder/nginx-proxy:alpine-0.7.0
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./enable_caching.conf:/etc/nginx/conf.d/enable_caching.conf:ro
+      - ./workdir/certs:/etc/nginx/certs:ro
+      - ./workdir/vhost.d:/etc/nginx/vhost.d
+      - tlschallenges:/usr/share/nginx/html
+    ports:
+      - 80:80
+      - 443:443
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+
+  # TODO add LE container
+
+volumes:
+  tlschallenges:
