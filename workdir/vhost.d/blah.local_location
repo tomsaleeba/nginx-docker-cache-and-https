@@ -1,0 +1,4 @@
+location /api {
+  proxy_pass http://blah.local;
+  proxy_no_cache 1; # always disable caching for API
+}

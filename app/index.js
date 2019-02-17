@@ -11,20 +11,29 @@ signals.forEach(sig => {
 })
 
 app.get('/nocache', (req, res) => {
-  console.log(`${new Date()} hit`)
+  console.log(`${new Date()} hit /nocache`)
   setTimeout(() => {
     const d = new Date()
-    console.log(`${d} resp`)
+    console.log(`${d} resp /nocache`)
     res.set('Cache-Control', 'no-cache, private').send(`${d} Hello World!`)
   }, 2000)
 })
 
 app.get('/cache', (req, res) => {
-  console.log(`${new Date()} hit`)
+  console.log(`${new Date()} hit /cache`)
   setTimeout(() => {
     const d = new Date()
-    console.log(`${d} resp`)
+    console.log(`${d} resp /cache`)
     res.send(`${d} Hello World!`)
+  }, 2000)
+})
+
+app.get('/api', (req, res) => {
+  console.log(`${new Date()} hit /api`)
+  setTimeout(() => {
+    const d = new Date()
+    console.log(`${d} resp /api`)
+    res.send(`${d} Hello API!`)
   }, 2000)
 })
 

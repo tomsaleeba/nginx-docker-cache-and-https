@@ -6,7 +6,8 @@ services:
       - ./app:/app
     entrypoint: node /app/index.js
     environment:
-      VIRTUAL_HOST: blah.local,www.blah.local
+      # if you change the VIRTUAL_HOST values, you must also change the files in workdir/vhost.d/
+      VIRTUAL_HOST: blah.local,www.blah.local # you can define multiple host names to serve under
 
   nginx:
     image: jwilder/nginx-proxy:alpine-0.7.0
